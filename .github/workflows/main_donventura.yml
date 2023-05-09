@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'donventura'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2A15268CD8EF4D138C994E51AB399E31 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7B9C264BFF3346B68C59F66863603249 }}
           package: .
