@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/262f9b44-03e0-4abb-8491-c3c786252552/resourceGroups/donventura_group/providers/Microsoft.Web/sites/donventuranackend",
+    "appService.deploySubpath": "."
+}
