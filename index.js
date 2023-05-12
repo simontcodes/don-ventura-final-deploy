@@ -31,6 +31,9 @@ app.use(morgan("tiny"));
 app.use(cors());
 
 // Routes
+app.get("/", (req, res) =>
+  res.json({ message: "Welcome to don ventura backend" })
+);
 app.use("/products", authenticateJWT, productsRoutes);
 app.use("/sales", authenticateJWT, salesRoutes);
 app.use("/counter", authenticateJWT, countersRoutes);
