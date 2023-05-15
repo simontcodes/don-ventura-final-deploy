@@ -36,6 +36,12 @@ app.use("/sales", authenticateJWT, salesRoutes);
 app.use("/counter", authenticateJWT, countersRoutes);
 app.use("/category", authenticateJWT, categoriesRoutes);
 app.use("/admin", adminsRoutes);
+app.use(express.static(__dirname));
+
+//backend home
+app.get("/", function (req, res) {
+  res.sendFile(__dirname + "/index.html");
+});
 
 // Start server
 const PORT = process.env.PORT || 8080;
