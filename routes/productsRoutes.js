@@ -47,8 +47,7 @@ router.get("/:id", async (req, res) => {
 
 //Creating one
 
-router.post("/", upload.single("image"), async (req, res) => {
-  console.log(req.file);
+router.post("/", async (req, res) => {
   const nextSequenceValue = await getNextSequenceValue("products");
   const newProduct = new Product({
     number: nextSequenceValue,
@@ -56,10 +55,7 @@ router.post("/", upload.single("image"), async (req, res) => {
     category: req.body.category,
     description: req.body.description,
     price: req.body.price,
-    image: {
-      path: req.file.path,
-      contentType: req.file.mimetype,
-    },
+    image: req.body.image,
   });
   try {
     await newProduct.save(); // save the product to the database
@@ -70,20 +66,13 @@ router.post("/", upload.single("image"), async (req, res) => {
 });
 
 // Updating one
-router.patch("/:id", getProduct, upload.single("image"), async (req, res) => {
+router.patch("/:id", getProduct, async (req, res) => {
   // Update product fields
   res.product.name = req.body.name || res.product.name;
   res.product.description = req.body.description || res.product.description;
   res.product.category = req.body.category || res.product.category;
   res.product.price = req.body.price || res.product.price;
-
-  // Check if image was uploaded
-  if (req.file) {
-    res.product.image = {
-      path: req.file.path,
-      contentType: req.file.mimetype,
-    };
-  }
+  res.product.image = req.body.image || res.product.image;
 
   try {
     const updatedProduct = await res.product.save(); // save the updated product
