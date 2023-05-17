@@ -61,12 +61,11 @@ router.post("/reset", async (req, res) => {
 });
 
 //route use for the edit profile Modal (it does not patch the password)
-router.patch("/", upload.single("image"), async (req, res) => {
-  console.log(req.body);
-  console.log(req.file);
+router.patch("/", async (req, res) => {
   try {
     const email = req.body.email;
     const name = req.body.name;
+    const image = req.body.image;
     const admin = await Admin.findOne({ email: email });
     if (!admin) {
       return res.status(404).send("Admin user not found.");
@@ -77,12 +76,8 @@ router.patch("/", upload.single("image"), async (req, res) => {
     if (email) {
       admin.email = email;
     }
-    if (req.file) {
-      // check if an image file was uploaded
-      admin.image = {
-        path: req.file.path,
-        contentType: req.file.mimetype,
-      };
+    if (image) {
+      admin.image = image;
     }
     const updatedAdmin = await admin.save();
     res.json(updatedAdmin);

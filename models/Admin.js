@@ -20,8 +20,7 @@ const AdminSchema = new mongoose.Schema({
     required: true,
   },
   image: {
-    path: String, // holds the image path
-    contentType: String, // holds the MIME type of the image
+    type: String,
   },
 });
 
