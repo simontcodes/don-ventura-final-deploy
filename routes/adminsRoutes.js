@@ -28,7 +28,7 @@ router.post("/login", async (req, res) => {
     const token = await admin.login(req.body.password);
     res
       .header("Authorization", `Bearer ${token}`)
-      .send({ name: admin.name, token, image: admin.image.path });
+      .send({ name: admin.name, token, image: admin.image });
   } catch (error) {
     res.status(400).send(error.message);
   }
